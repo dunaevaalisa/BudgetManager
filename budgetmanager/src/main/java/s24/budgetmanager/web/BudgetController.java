@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -158,4 +159,11 @@ public class BudgetController {
         return "redirect:/purchaselist"; 
     }
 
-}
+
+    @GetMapping("/budgethistory")
+    public String showBudgetHistory(Model model) {
+        model.addAttribute("budgets", brepository.findAll());
+        return "budgethistory";
+    }
+
+}   
