@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BudgetmanagerApplication<budgetmanager>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "s24.budgetmanager.BudgetmanagerApplication",
+            "projectName": "budgetmanager",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

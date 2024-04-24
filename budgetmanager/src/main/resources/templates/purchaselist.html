@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Purchase list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<style>
+        .budget-container {
+            text-align: center; /* Center the content horizontally */
+            border: 1px solid #ccc; /* Add a border around the container */
+            padding: 10px; /* Add some padding for spacing */
+            margin-bottom: 20px; /* Add margin at the bottom for spacing */
+        }
+		.add-purchase-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Button color */
+            color: #fff; /* Text color */
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px; /* Rounded corners */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+        .add-purchase-button:hover {
+            background-color: #0056b3; /* Darker color on hover */
+        }
+    </style>
+</head>
+<body>
+<div class="budget-container">
+    <h1>Budget: <span th:text="${budget.amount}"></span></h1>
+    <a th:href="@{/addbudget}" class="add-budget-button">Change the Budget</a> 
+</div>
+	<h1>Purchases</h1>
+	<table class="table table-striped">
+		<tr>
+		    <th>Title</th>
+		    <th>Price</th>
+			<th>Place</th>
+			<th>Category</th>
+			<th>Date</th>
+			<th>Edit</th>
+			<th>Delete</th>
+			
+		</tr>  
+    	<tr th:each="purchase : ${purchases}">
+            <td th:text="${purchase.title}"></td>
+            <td th:text="${purchase.price}"></td>
+            <td th:text="${purchase.place}"></td>
+            <td th:text="${purchase.category.name}"></td>
+			<td th:text="${#temporals.format(purchase.purchaseDateTime, 'dd.MM.yyyy HH:mm')}"></td>
+            <td><a th:href="@{/edit/{id}(id=${purchase.id})}">Edit</a></td>     
+            <td class="btn btn-danger" ><a th:href="@{/delete/{id}(id=${purchase.id})}">Delete</a></td>       
+        </tr>
+     </table>   
+	 <a href="/add" class="add-purchase-button">Add Purchase</a>   
+     <div class="col-md-4" style="padding: 20px 0">
+        <form th:action="@{/logout}" method="post">
+          <input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
+        </form>
+      </div>
+</body>
+</html>
