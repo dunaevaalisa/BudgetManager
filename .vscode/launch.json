@@ -9,6 +9,16 @@
             "projectName": "budgetmanager",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-BudgetmanagerApplication<StudentListSignUp>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "s24.budgetmanager.BudgetmanagerApplication",
+            "projectName": "StudentListSignUp",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }

@@ -5,8 +5,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Entity
@@ -16,25 +22,44 @@ public class Budget {
     private Long budgetid;
     
     private String name;
-    private int month;
-    private int year;
-    private double amount;
+    private double totalAmount;
+    private double totalSpent;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private double dailyBudget;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "budget")
 	private List<Purchase> purchases;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "budget")
+	private List<Income> incomes;
+
+     @ManyToOne
+     @JoinColumn(name = "incomeid")
+     private Income income;
+
     public Budget() {
     }
 
-    public Budget(String name, int month, int year, double amount) {
+    public Budget(String name,double totalAmount, LocalDate endDate, LocalDate startDate) {
         super();
         this.name = name;
-        this.month = month;
-        this.year = year;
-        this.amount = amount;
+        this.totalAmount = totalAmount;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dailyBudget = calculateDailyBudget();
+    }
+
+    private double calculateDailyBudget() {
+        long daysBetween = ChronoUnit.DAYS.between(endDate, startDate);
+        return totalAmount / daysBetween;
     }
 
     //getters and setters
+
+    public double getDailyBudget() {
+        return calculateDailyBudget();
+    }
 
     public Long getBudgetid() {
         return budgetid;
@@ -52,36 +77,32 @@ public class Budget {
     public void setName(String name) {
         this.name = name;
     }
-    public int getMonth() {
-        return month;
+
+    public double getTotalAmount() {
+        return totalAmount;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-
-    public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
 
-    public double getAmount() {
-        return amount;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
-    @Override
-    public String toString() {
-        return "Budget [id=" + budgetid + ", name=" + name + ", month=" + month + ", year=" + year + ", amount=" + amount + "]";
+    public long getDaysLeft() {
+        return ChronoUnit.DAYS.between(endDate, startDate);
     }
-    
-    
+      
 }

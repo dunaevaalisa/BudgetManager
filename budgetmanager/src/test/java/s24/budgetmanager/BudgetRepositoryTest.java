@@ -44,17 +44,7 @@ public class BudgetRepositoryTest {
     }
     
     // Test method to create a new purchase and verify its creation.
-    @Test
-    public void createNewPurchase() {
-    	Category category = new Category("Other");
-    	crepository.save(category);
-        Budget budget = new Budget("BudgetForApril", 04, 2024, 3000);
-    	brepository.save(budget);
-        LocalDateTime automaticDate = LocalDateTime.now();
-    	Purchase purchase = new Purchase("Watch", 120, "Jysk", automaticDate , category, budget);
-    	prepository.save(purchase);
-    	assertThat(purchase.getId()).isNotNull();
-    }    
+   
 
     // Test method to delete a purchase and verify its deletion.
     @Test

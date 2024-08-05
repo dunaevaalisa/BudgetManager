@@ -7,7 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import s24.budgetmanager.domain.AppUser;
 import s24.budgetmanager.domain.AppUserRepository;
@@ -50,10 +53,18 @@ public class BudgetmanagerApplication {
             crepository.save(category7);
             crepository.save(category8);
 
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate endDate1 = LocalDate.parse("2024-06-01", formatter);
+            LocalDate endDate2 = LocalDate.parse("2024-07-01", formatter);  
+            LocalDate endDate3 = LocalDate.parse("2024-08-01", formatter);  
+            LocalDate startDate1 = LocalDate.parse("2024-05-21", formatter);
+            LocalDate startDate2 = LocalDate.parse("2024-06-15", formatter);  
+            LocalDate startDate3 = LocalDate.parse("2024-07-01", formatter);  
+
             // Save budgets
-            Budget budget1 = new Budget("first", 04, 2024, 2000);
-            Budget budget2 = new Budget("second", 05, 2024, 1000);
-            Budget budget3 = new Budget("third", 06, 2024, 3000);
+            Budget budget1 = new Budget("first", 2000, startDate1, endDate1);
+            Budget budget2 = new Budget("second", 1000 , startDate2, endDate2);
+            Budget budget3 = new Budget("third", 3000, startDate3, endDate3);
             brepository.save(budget1);
             brepository.save(budget2);
             brepository.save(budget3);

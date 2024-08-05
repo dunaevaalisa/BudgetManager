@@ -67,11 +67,15 @@
     </style>
 </head>
 <body>
-<div class="budget-container">
-    <h1>Budget: <span th:text="${budget.amount}"></span></h1>
-    <a th:href="@{/addbudget}" class="button change-budget-button">Change Budget</a>
-    <a th:href="@{/budgethistory}" class="button budget-history-button">Budget History</a>
-</div>
+    <div class="budget-container">
+        <h1>Budget: <span th:text="${budget.totalAmount}"></span></h1>
+        <a th:href="@{/addbudget}" class="button change-budget-button">Change Budget</a>
+        <a th:href="@{/budgethistory}" class="button budget-history-button">Budget History</a>
+        <a th:href="@{/addincome}" class="button budget-history-button">Add income</a>
+        <a th:href="@{/incomehistory}" class="button income-history-button">Income History</a>
+        <h3>Budget per day: <span th:text="${dailyBudget}"></span></h3>
+        <h3>Days left:  <span th:text="${daysLeft}"></span></h3>
+    </div>
 	<h1>Purchases</h1>
 	<table class="table table-striped">
 		<tr>

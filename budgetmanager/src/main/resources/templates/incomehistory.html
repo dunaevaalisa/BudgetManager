@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Budget History</title>
+    <title>Income History</title>
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-    <h1>Budget History</h1>
+    <h1>Income History</h1>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Month</th>
+                <th>Year</th>
                 <th>Amount</th>
-                <th>Start date</th>
-                <th>End date</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="budget : ${budgets}">
-                <td th:text="${budget.name}"></td>
-                <td th:text="${budget.totalAmount}"></td>
-                <td th:text="${budget.startDate}"></td>
-                <td th:text="${budget.endDate}"></td>
+            <tr th:each="income : ${incomes}">
+                <td th:text="${income.name}"></td>
+                <td th:text="${income.month}"></td>
+                <td th:text="${income.year}"></td>
+                <td th:text="${income.amount}"></td>
             </tr>
         </tbody>
     </table>
